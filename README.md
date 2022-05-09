@@ -16,6 +16,13 @@ helm repo add jenkins https://charts.jenkins.io
 helm install jenkins --namespace default -f values-production.yaml jenkins/jenkins
 ```
 
+## Install Mongodb
+
+```
+cd ./helm
+helm upgrade --install mongodb --namespace app -f ./mongodb/values-production.yaml ./mongodb
+```
+
 ## Install Docker registry 
 
 ```
