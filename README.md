@@ -30,6 +30,14 @@ cd ./helm
 helm upgrade --install rabbitmq --namespace app -f ./rabbitmq/values-production.yaml ./rabbitmq
 ```
 
+## Install Minio
+
+```
+cd ./helm
+helm repo add minio https://charts.min.io/
+helm upgrade --install minio --namespace app -f ./minio/values-production.yaml minio/minio
+```
+
 ## Install Docker registry 
 
 ```
