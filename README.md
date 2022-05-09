@@ -16,6 +16,10 @@ helm repo add jenkins https://charts.jenkins.io
 helm install jenkins --namespace default -f values-production.yaml jenkins/jenkins
 ```
 
+TODO: configure jenkins env for docker build 
+TODO: move general project to elasticdata-io
+TODO: configure default build steps with jenkins env 
+
 ## Install Mongodb
 
 ```
