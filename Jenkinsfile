@@ -50,11 +50,12 @@ spec:
                             ./helm/rabbitmq"
 					}
 					stage('install minio') {
+					    sh "helm repo add minio https://charts.min.io"
 						sh "helm upgrade \
                             --install minio \
                             --namespace app \
                             -f ./helm/minio/values-production.yaml \
-                            ./helm/minio"
+                            minio/minio"
 					}
 				}
 			}
