@@ -23,6 +23,13 @@ cd ./helm
 helm upgrade --install mongodb --namespace app -f ./mongodb/values-production.yaml ./mongodb
 ```
 
+## Install Rabbitmq
+
+```
+cd ./helm
+helm upgrade --install rabbitmq --namespace app -f ./rabbitmq/values-production.yaml ./rabbitmq
+```
+
 ## Install Docker registry 
 
 ```
