@@ -8,12 +8,20 @@ helm install dashboard kubernetes-dashboard/kubernetes-dashboard
 kubectl --namespace default port-forward svc/dashboard-kubernetes-dashboard 8443:443
 ```
 
+## Install Cert-Manager
+
+Add  issuer:
+
+```
+kubectl apply -f ./kubetcl/issuer.yaml
+```
+
 ## Install Jenkins
 
 ```
 cd ./helm
 helm repo add jenkins https://charts.jenkins.io
-helm install jenkins --namespace default -f ./jenkins/values-production.yaml jenkins/jenkins
+helm upgrade --install jenkins --namespace default -f ./jenkins/values-production.yaml jenkins/jenkins
 kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --user=admin --user=kubelet --group=system:serviceaccounts
 kubectl create ns app
 ```
