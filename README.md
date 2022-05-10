@@ -11,12 +11,19 @@ kubectl --namespace default port-forward svc/dashboard-kubernetes-dashboard 8443
 ## Install Jenkins
 
 ```
-cd ./helm/jenkins
+cd ./helm
 helm repo add jenkins https://charts.jenkins.io
-helm install jenkins --namespace default -f values-production.yaml jenkins/jenkins
+helm install jenkins --namespace default -f ./jenkins/values-production.yaml jenkins/jenkins
+kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --user=admin --user=kubelet --group=system:serviceaccounts
+kubectl create ns app
 ```
 
-TODO: configure jenkins env for docker build 
+Add global variables:
+
+* DOCKER_CONTAINER_PREFIX
+* DOCKER_CONTAINER_LOGIN
+* DOCKER_CONTAINER_PASSWORD
+
 TODO: move general project to elasticdata-io
 TODO: configure default build steps with jenkins env 
 

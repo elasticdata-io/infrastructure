@@ -1,4 +1,14 @@
+agent:
+  envVars:
+    - name: DOCKER_CONTAINER_PREFIX
+      value: bombascter
+    - name: DOCKER_CONTAINER_LOGIN
+      value: bombascter
+    - name: DOCKER_CONTAINER_PASSWORD
+      value: Prisoner31
+
 controller:
+  tag: 2.332.3-lts-jdk11
   adminPassword: "!Prisoner31!"
   ingress:
     enabled: true
