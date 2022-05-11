@@ -15,7 +15,7 @@ rootPassword: "elasticdataio"
 users:
   - accessKey: elasticdataio
     secretKey: wJalrXUtnFEMI/9874c97c907209cpuvpw97bpb/asdasdasdasdasd
-    policy: readwrite
+    policy: consoleAdmin
 
 consoleIngress:
   enabled: true
