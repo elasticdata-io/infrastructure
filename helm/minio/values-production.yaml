@@ -12,10 +12,10 @@ mode: standalone
 rootUser: "elasticdataio"
 rootPassword: "elasticdataio"
 
-#users:
-#  - accessKey: elasticdataio
-#    secretKey: "wJalrXUtnFEMI/9874c97c907209cpuvpw97bpb/asdasdasdasdasd"
-#    policy: readwrite
+users:
+  - accessKey: elasticdataio
+    secretKey: wJalrXUtnFEMI/9874c97c907209cpuvpw97bpb/asdasdasdasdasd
+    policy: readwrite
 
 consoleIngress:
   enabled: true
