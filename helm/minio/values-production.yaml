@@ -9,13 +9,13 @@ resources:
 replicas: 1
 mode: standalone
 
-rootUser: "elasticdataio"
-rootPassword: "elasticdataio"
+rootUser: "admin"
+rootPassword: "!Prisoner31!"
 
 users:
   - accessKey: elasticdataio
     secretKey: wJalrXUtnFEMI/9874c97c907209cpuvpw97bpb/asdasdasdasdasd
-    policy: consoleAdmin
+    policy: readwrite
 
 consoleIngress:
   enabled: true
