@@ -57,6 +57,14 @@ helm repo add minio https://charts.min.io/
 helm upgrade --install minio --namespace app -f ./minio/values-production.yaml minio/minio
 ```
 
+## Install Elasticsearch
+
+```
+cd ./helm
+helm repo add elastic https://helm.elastic.co
+helm upgrade --install es --namespace app -f ./es/values-production.yaml elastic/elasticsearch
+```
+
 ## Install Docker registry 
 
 ```

@@ -57,6 +57,14 @@ spec:
                             -f ./helm/minio/values-production.yaml \
                             minio/minio"
 					}
+					stage('install es') {
+						sh "helm repo add elastic https://helm.elastic.co"
+						sh "helm upgrade \
+                            --install es \
+                            --namespace app \
+                            -f ./helm/es/values-production.yaml \
+                            elastic/elasticsearch"
+					}
 				}
 			}
 		}
