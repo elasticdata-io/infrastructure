@@ -1,22 +1,26 @@
-roles:
-  master: "true"
-  ingest: "true"
-  data: "true"
-  extraEnvs:
-    - name: xpack.security.enabled
-      value: "false"
-    - name: xpack.monitoring.enabled
-      value: "false"
-    - name: xpack.graph.enabled
-      value: "false"
-    - name: xpack.watcher.enabled
-      value: "false"
-    - name: ES_JAVA_OPTS
-      value: "-Xmx1g -Xms1g"
+#roles:
+#  - master
+#  - data
+#  - ingest
+#  - remote_cluster_client
+
+#extraEnvs:
+#  - name: xpack.security.enabled
+#    value: "false"
+##  - name: xpack.monitoring.enabled
+##    value: "false"
+##  - name: xpack.graph.enabled
+##    value: "false"
+##  - name: xpack.watcher.enabled
+##    value: "false"
+#  - name: node.ml
+#    value: 'false'
+#  - name: ES_JAVA_OPTS
+#    value: "-Xmx1g -Xms1g"
 
 replicas: 1
 minimumMasterNodes: 1
-imageTag: "8.1.0"
+imageTag: "7.17.3"
 
 esJavaOpts: "-Xmx1g -Xms1g"
 
@@ -32,7 +36,7 @@ volumeClaimTemplate:
   accessModes: ["ReadWriteOnce"]
   resources:
     requests:
-      storage: 30Gi
+      storage: 2Gi
 
 persistence:
   enabled: true
