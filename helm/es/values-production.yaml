@@ -1,22 +1,22 @@
 #roles:
-#  - master
-#  - data
-#  - ingest
-#  - remote_cluster_client
-
+#  master: "true"
+#  ingest: "true"
+#  data: "true"
+#  remote_cluster_client: "true"
+#  ml: "false"
 #extraEnvs:
 #  - name: xpack.security.enabled
 #    value: "false"
-##  - name: xpack.monitoring.enabled
-##    value: "false"
-##  - name: xpack.graph.enabled
-##    value: "false"
-##  - name: xpack.watcher.enabled
-##    value: "false"
-#  - name: node.ml
-#    value: 'false'
+#  - name: xpack.monitoring.enabled
+#    value: "false"
+#  - name: xpack.ml.enabled
+#    value: "false"
+#  - name: xpack.graph.enabled
+#    value: "false"
+#  - name: xpack.watcher.enabled
+#    value: "false"
 #  - name: ES_JAVA_OPTS
-#    value: "-Xmx1g -Xms1g"
+#    value: "-Xms1500m -Xmx1500m"
 
 replicas: 1
 minimumMasterNodes: 1
