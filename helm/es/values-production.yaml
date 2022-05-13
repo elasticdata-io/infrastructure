@@ -2,7 +2,6 @@ roles:
   master: "true"
   ingest: "true"
   data: "true"
-  remote_cluster_client: "true"
   extraEnvs:
     - name: xpack.security.enabled
       value: "false"
