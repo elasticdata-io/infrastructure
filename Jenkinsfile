@@ -30,7 +30,9 @@ spec:
   }
   stages {
     stage('checkout') {
-      checkout scm
+      steps {
+        checkout scm
+      }
       container('k8s-helm') {
         stage('install mongodb') {
           steps {
