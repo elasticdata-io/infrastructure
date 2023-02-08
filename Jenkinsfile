@@ -34,7 +34,7 @@ spec:
                 checkout scm
             }
         }
-        stage('deploy') {
+        stage('mongodb') {
             steps {
                 container('k8s-helm') {
                     sh "helm upgrade \
@@ -42,11 +42,23 @@ spec:
                         --namespace app \
                         -f ./helm/mongodb/values-production.yaml \
                         ./helm/mongodb"
+                }
+            }
+        }
+        stage('rabbitmq') {
+            steps {
+                container('k8s-helm') {
                     sh "helm upgrade \
                         --install rabbitmq \
                         --namespace app \
                         -f ./helm/rabbitmq/values-production.yaml \
                         ./helm/rabbitmq"
+                }
+            }
+        }
+        stage('minio') {
+            steps {
+                container('k8s-helm') {
                     sh "helm repo add minio https://charts.min.io"
                     sh "helm upgrade \
                         --install minio \
