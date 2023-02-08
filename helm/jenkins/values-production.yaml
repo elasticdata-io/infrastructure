@@ -28,7 +28,7 @@ controller:
     - workflow-aggregator:2.6
     - configuration-as-code:1414.v878271fc496f
     - credentials-binding:523.vd859a_4b_122e6
-    - git:4.11.1
+    - git:5.0.0
     - pipeline-github-lib:36.v4c01db_ca_ed16
     - ghprb:1.42.2
-    - blueocean:1.25.3
+    - blueocean:1.27.1
