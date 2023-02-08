@@ -33,15 +33,11 @@ spec:
             steps {
                 checkout scm
                 container('k8s-helm') {
-                    stage('install mongodb') {
-                        steps {
-                            sh "helm upgrade \
-                            --install mongodb \
-                            --namespace app \
-                            -f ./helm/mongodb/values-production.yaml \
-                            ./helm/mongodb"
-                        }
-                    }
+                    sh "helm upgrade \
+                        --install mongodb \
+                        --namespace app \
+                        -f ./helm/mongodb/values-production.yaml \
+                        ./helm/mongodb"
                 }
 
 //         stage('install rabbitmq') {
