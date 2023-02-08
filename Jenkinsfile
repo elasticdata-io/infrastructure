@@ -32,48 +32,26 @@ spec:
         stage('checkout') {
             steps {
                 checkout scm
-                container('k8s-helm') {
-                    sh "helm upgrade \
-                        --install mongodb \
-                        --namespace app \
-                        -f ./helm/mongodb/values-production.yaml \
-                        ./helm/mongodb"
-                    sh "helm upgrade \
-                        --install rabbitmq \
-                        --namespace app \
-                        -f ./helm/rabbitmq/values-production.yaml \
-                        ./helm/rabbitmq"
-                    sh "helm repo add minio https://charts.min.io"
-                    sh "helm upgrade \
-                        --install minio \
-                        --namespace app \
-                        -f ./helm/minio/values-production.yaml \
-                        minio/minio"
-                }
-
-//         stage('install rabbitmq') {
-//           sh "helm upgrade \
-//                 --install rabbitmq \
-//                 --namespace app \
-//                 -f ./helm/rabbitmq/values-production.yaml \
-//                 ./helm/rabbitmq"
-//         }
-//         stage('install minio') {
-//           sh "helm repo add minio https://charts.min.io"
-//           sh "helm upgrade \
-//                 --install minio \
-//                 --namespace app \
-//                 -f ./helm/minio/values-production.yaml \
-//                 minio/minio"
-//         }
-//         stage('install es') {
-//           sh "helm repo add elastic https://helm.elastic.co"
-//           sh "helm upgrade \
-//                 --install es \
-//                 --namespace app \
-//                 -f ./helm/es/values-production.yaml \
-//                 elastic/elasticsearch"
-//         }
+            }
+        }
+        stage('deploy') {
+            container('k8s-helm') {
+                sh "helm upgrade \
+                    --install mongodb \
+                    --namespace app \
+                    -f ./helm/mongodb/values-production.yaml \
+                    ./helm/mongodb"
+                sh "helm upgrade \
+                    --install rabbitmq \
+                    --namespace app \
+                    -f ./helm/rabbitmq/values-production.yaml \
+                    ./helm/rabbitmq"
+                sh "helm repo add minio https://charts.min.io"
+                sh "helm upgrade \
+                    --install minio \
+                    --namespace app \
+                    -f ./helm/minio/values-production.yaml \
+                    minio/minio"
             }
         }
     }
