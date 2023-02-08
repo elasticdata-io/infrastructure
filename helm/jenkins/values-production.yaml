@@ -8,7 +8,7 @@ agent:
       value: Prisoner31
 
 controller:
-  tag: 2.332.3-lts-jdk11
+  tag: 2.375.3-lts-jdk11
   adminPassword: "!Prisoner31!"
   ingress:
     enabled: true
