@@ -35,8 +35,8 @@ spec:
             }
         }
         stage('deploy') {
-            container('k8s-helm') {
-                steps {
+            steps {
+                container('k8s-helm') {
                     sh "helm upgrade \
                         --install mongodb \
                         --namespace app \
