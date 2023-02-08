@@ -25,10 +25,10 @@ controller:
       memory: 1024Mi
   installPlugins:
     - kubernetes:3845.va_9823979a_744
-    - workflow-aggregator:2.6
+    - workflow-aggregator:590.v6a_d052e5a_a_b_5
     - configuration-as-code:1569.vb_72405b_80249
     - credentials-binding:523.vd859a_4b_122e6
     - git:5.0.0
-    - pipeline-github-lib:36.v4c01db_ca_ed16
+    - pipeline-github-lib:38.v445716ea_edda_
     - ghprb:1.42.2
     - blueocean:1.27.1
