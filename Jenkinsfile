@@ -1,8 +1,8 @@
 pipeline {
-  agent {
-    kubernetes {
-      defaultContainer 'kaniko'
-      yaml '''
+    agent {
+        kubernetes {
+            defaultContainer 'kaniko'
+            yaml '''
 apiVersion: v1
 kind: Pod
 metadata:
@@ -26,23 +26,24 @@ spec:
       - name: kubeconfig
         mountPath: "/opt/.kube"
 '''
-    }
-  }
-  stages {
-    stage('checkout') {
-      steps {
-        checkout scm
-      }
-      container('k8s-helm') {
-        stage('install mongodb') {
-          steps {
-            sh "helm upgrade \
-                --install mongodb \
-                --namespace app \
-                -f ./helm/mongodb/values-production.yaml \
-                ./helm/mongodb"
-          }
         }
+    }
+    stages {
+        stage('checkout') {
+            steps {
+                checkout scm
+                container('k8s-helm') {
+                    stage('install mongodb') {
+                        steps {
+                            sh "helm upgrade \
+                            --install mongodb \
+                            --namespace app \
+                            -f ./helm/mongodb/values-production.yaml \
+                            ./helm/mongodb"
+                        }
+                    }
+                }
+
 //         stage('install rabbitmq') {
 //           sh "helm upgrade \
 //                 --install rabbitmq \
@@ -66,7 +67,7 @@ spec:
 //                 -f ./helm/es/values-production.yaml \
 //                 elastic/elasticsearch"
 //         }
-      }
+            }
+        }
     }
-  }
 }
