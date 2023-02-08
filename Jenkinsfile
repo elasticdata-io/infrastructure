@@ -1,13 +1,12 @@
-#!groovy
 pipeline {
   agent none
   stages {
-    stage("foo") {
+    stage('foo') {
       agent any
-
       steps {
-        echo "hello"
+        echo 'hello'
       }
     }
+
   }
 }
