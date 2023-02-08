@@ -1,53 +1,71 @@
-pipeline {
-  agent any
-  stages {
-    stage('build') {
-      agent {
-        docker {
-          image 'XYZ'
-          label 'slave-A'
-          args '-v /etc/localtime:/etc/localtime:ro'
-        }
+#!groovy
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
 
-      }
-      steps {
-        echo '########################################## Building #########################################'
-        sh 'scm-src/build.sh all-projects'
-      }
-    }
+def label = "infrastructure-${UUID.randomUUID().toString()}"
+podTemplate(label: label, yaml: """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: some-label-value
+spec:
+  volumes:
+  - name: dockersock
+    hostPath:
+      path: /var/run/docker.sock
+  - name: kubeconfig
+    hostPath:
+      path: /opt/kubernetes/storage/.kube
+  containers:
+  - name: k8s-helm
+    image: lachlanevenson/k8s-helm:v3.6.0
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+      - name: kubeconfig
+        mountPath: "/opt/.kube"
+"""
+)
+	{
+		node(label) {
+			stage('checkout') {
 
-    stage('prepare_test') {
-      agent {
-        docker {
-          image 'ABC'
-          label 'laptop-hp'
-          args '-v /home/jenkins/.ssh/:/home/jenkins/.ssh:ro -v /etc/localtime:/etc/localtime:ro'
-        }
+				checkout scm
 
-      }
-      steps {
-        echo '####################################### Prepare Test Environment ############################'
-        sh 'scm-src/test.sh prepare'
-      }
-    }
-
-    stage('test') {
-      agent {
-        docker {
-          image 'ABC'
-          label 'laptop-hp'
-          args '-v /home/jenkins/.ssh/:/home/jenkins/.ssh:ro -v /etc/localtime:/etc/localtime:ro'
-        }
-
-      }
-      steps {
-        echo '########################################## Testing ##########################################'
-        sh 'scm-src/test.sh run'
-      }
-    }
-
-  }
-  options {
-    skipDefaultCheckout(true)
-  }
-}
+				container('k8s-helm') {
+					stage('install mongodb') {
+						sh "helm upgrade \
+                            --install mongodb \
+                            --namespace app \
+                            -f ./helm/mongodb/values-production.yaml \
+                            ./helm/mongodb"
+					}
+					stage('install rabbitmq') {
+						sh "helm upgrade \
+                            --install rabbitmq \
+                            --namespace app \
+                            -f ./helm/rabbitmq/values-production.yaml \
+                            ./helm/rabbitmq"
+					}
+					stage('install minio') {
+					    sh "helm repo add minio https://charts.min.io"
+						sh "helm upgrade \
+                            --install minio \
+                            --namespace app \
+                            -f ./helm/minio/values-production.yaml \
+                            minio/minio"
+					}
+					stage('install es') {
+						sh "helm repo add elastic https://helm.elastic.co"
+						sh "helm upgrade \
+                            --install es \
+                            --namespace app \
+                            -f ./helm/es/values-production.yaml \
+                            elastic/elasticsearch"
+					}
+				}
+			}
+		}
+	}
