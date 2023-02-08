@@ -36,22 +36,24 @@ spec:
         }
         stage('deploy') {
             container('k8s-helm') {
-                sh "helm upgrade \
-                    --install mongodb \
-                    --namespace app \
-                    -f ./helm/mongodb/values-production.yaml \
-                    ./helm/mongodb"
-                sh "helm upgrade \
-                    --install rabbitmq \
-                    --namespace app \
-                    -f ./helm/rabbitmq/values-production.yaml \
-                    ./helm/rabbitmq"
-                sh "helm repo add minio https://charts.min.io"
-                sh "helm upgrade \
-                    --install minio \
-                    --namespace app \
-                    -f ./helm/minio/values-production.yaml \
-                    minio/minio"
+                steps {
+                    sh "helm upgrade \
+                        --install mongodb \
+                        --namespace app \
+                        -f ./helm/mongodb/values-production.yaml \
+                        ./helm/mongodb"
+                    sh "helm upgrade \
+                        --install rabbitmq \
+                        --namespace app \
+                        -f ./helm/rabbitmq/values-production.yaml \
+                        ./helm/rabbitmq"
+                    sh "helm repo add minio https://charts.min.io"
+                    sh "helm upgrade \
+                        --install minio \
+                        --namespace app \
+                        -f ./helm/minio/values-production.yaml \
+                        minio/minio"
+                }
             }
         }
     }
