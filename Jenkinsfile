@@ -31,7 +31,7 @@ spec:
     stages {
         stage('checkout') {
             steps {
-                checkout scm
+                // checkout scm
             }
         }
         stage('mongodb') {
