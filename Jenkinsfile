@@ -29,11 +29,11 @@ spec:
         }
     }
     stages {
-        stage('checkout') {
-            steps {
+        //stage('checkout') {
+            //steps {
                 // checkout scm
-            }
-        }
+            //}
+        //}
         stage('mongodb') {
             steps {
                 container('k8s-helm') {
